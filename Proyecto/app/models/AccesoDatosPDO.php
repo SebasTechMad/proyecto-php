@@ -59,7 +59,7 @@ class AccesoDatos {
         $tuser = [];
         // Crea la sentencia preparada
        // echo "<h1> $primero : $cuantos  </h1>";
-        $stmt_usuarios  = $this->dbh->prepare("select * from Clientes limit $primero,$cuantos");
+        $stmt_usuarios  = $this->dbh->prepare("select * from Clientes ORDER BY ".$_SESSION['current_ordenacion']." ".$_SESSION['current_sentido']." limit $primero,$cuantos");
         // Si falla termina el programa
         $stmt_usuarios->setFetchMode(PDO::FETCH_CLASS, 'Cliente');
     

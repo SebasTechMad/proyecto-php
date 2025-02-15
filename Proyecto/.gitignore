@@ -1,1 +1,4 @@
 app/uploads
+Proyecto/vendor/mpdf/mpdf
+Proyecto/vendor/myclabs/deep-copy
+Proyecto/vendor/setasign/fpdi

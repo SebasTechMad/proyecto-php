@@ -5,12 +5,12 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>IP Address</th>
-            <th>Teléfono</th>
+            <th><a href="?ordenacion=id">ID</a></th>
+            <th><a href="?ordenacion=first_name">First Name</a></th>
+            <th><a href="?ordenacion=email">Email</a></th>
+            <th><a href="?ordenacion=gender">Gender</a></th>
+            <th><a href="?ordenacion=ip_address">IP address</a></th>
+            <th><a href="?ordenacion=telefono">Teléfono</a></th>
             <th colspan="3" ></th>
         </tr>
     </thead>

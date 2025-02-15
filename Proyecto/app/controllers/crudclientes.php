@@ -26,9 +26,11 @@ function crudAlta(){
 
 function crudDetalles($id){
     global $bandera;
+    global $imgURL;
 
     $db = AccesoDatos::getModelo();
     $cli = $db->getCliente($id);
+    $imgURL = checkFotoPerfil($id);
     $bandera = getBandera($cli->ip_address);
     include_once "app/views/detalles.php";
 }
@@ -41,7 +43,6 @@ function crudModificar($id){
     $db = AccesoDatos::getModelo();
     $cli = $db->getCliente($id);
     $imgURL = checkFotoPerfil($id);
-    print_r($imgURL);
     $orden="Modificar";
     include_once "app/views/formulario.php";
 }

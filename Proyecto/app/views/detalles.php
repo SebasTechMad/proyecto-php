@@ -5,7 +5,10 @@
  <tr><td>id:</td> 
  <td><input type="number" name="id" value="<?=$cli->id ?>"  readonly > </td>
  <td rowspan="7">
-<img src="<?= $bandera ?>"></img>
+<div class="display:flex; width:10rem; gap:1rem;">
+    <img src="<?= $bandera ?>" style="width: 200px;"></img>
+    <img src="<?= $imgURL ?>" style="width: 200px;"></img>
+</div>
 </td> 
 </tr>
  <tr><td>first_name:</td> 

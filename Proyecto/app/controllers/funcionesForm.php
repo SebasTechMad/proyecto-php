@@ -188,54 +188,43 @@
         
         
         $html = '<hr>
-                <button onclick="location.href='."./".'"> Volver </button>
                 <br><br>
-
-
-                    <div style="width:100%; display: flex; flex-wrap: wrap; gap: 1rem;">
-                    <div style="width: 40%;">
-                        <table>
-                            <tr>
-                                <td>id:</td>
-                                <td><input type="number" name="id" value="'.$cli->id.'" readonly> </td>
-                                <td rowspan="7">
-                                    <img src=""></img>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>first_name:</td>
-                                <td><input type="text" name="first_name" value="'.$cli->first_name.'" readonly> </td>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <td>last_name:</td>
-                                <td><input type="text" name="last_name" value="'.$cli->last_name.'" readonly></td>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <td>email:</td>
-                                <td><input type="email" name="email" value="'. $cli->email.'" readonly></td>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <td>gender</td>
-                                <td><input type="text" name="gender" value="'. $cli->gender.'" readonly></td>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <td>ip_address:</td>
-                                <td><input type="text" name="ip_address" value="'.$cli->ip_address.'" readonly></td>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <td>telefono:</td>
-                                <td><input type="tel" name="telefono" value="'.$cli->telefono.'" readonly></td>
-                            </tr>
-                            </tr>
-                        </table>
-                    </div>
-                    <div style="width:40%; display:flex; flex-direction:column; justify-content:center; align-items: center; gap:2rem;">
-                            <img src="'.$imgURL.'" style="object-fit: cover; width: 200px; height: 300px;" alt="">
+                    <div style="width:100%; display: flex; flex-direction:row; flex-wrap: wrap;">
+                        <div style="width: 40%;">
+                            <table>
+                                <tr>
+                                    <td>id:</td>
+                                    <td>'.$cli->id.'</td>
+                                </tr>
+                                <tr>
+                                    <td>first_name:</td>
+                                    <td>'.$cli->first_name.'</td>
+                                </tr>
+                                </tr>
+                                <tr>
+                                    <td>last_name:</td>
+                                    <td>'.$cli->last_name.'</td>
+                                </tr>
+                                <tr>
+                                    <td>email:</td>
+                                    <td>'.$cli->email.'</td>
+                                </tr>
+                                <tr>
+                                    <td>gender</td>
+                                    <td>'.$cli->gender.'</td>
+                                </tr>
+                                <tr>
+                                    <td>ip_address:</td>
+                                    <td>'.$cli->ip_address.'</td>
+                                </tr>
+                                <tr>
+                                    <td>telefono:</td>
+                                    <td>'.$cli->telefono.'</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width:40%; display:flex; flex-direction:column; justify-content:center; align-items: center; gap:2rem;">
+                            <img src="'.$imgURL.'" style="width: 200px; object-fit:cover; height: 300px;" alt="">
                         </div>
                     </div>';
 
@@ -268,13 +257,13 @@
         // Decodificar el JSON
         $json_ip = json_decode($response, true);
 
-        print_r($json_ip);
 
-
-
-
-        $url = "https://flagpedia.net/data/flags/w580/".strtolower($json_ip['countryCode']).".png";
-
+        if(isset($json_ip['countryCode'])){
+            $url = "https://flagpedia.net/data/flags/w580/".strtolower($json_ip['countryCode']).".png";
+        }else{
+            $url = "./app/uploads/calavera.jpg";
+        }
+        
         return $url;
     }
 

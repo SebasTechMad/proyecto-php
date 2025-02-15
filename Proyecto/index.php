@@ -17,6 +17,7 @@ if(!isset($_SESSION['current_id'])){
 
 $imgURL = "";
 $bandera = "";
+// $_SESSION['organizar'] = "";
 
 //---- PAGINACIÓN ----
 $midb = AccesoDatos::getModelo();
@@ -32,11 +33,63 @@ if ( !isset($_SESSION['posini']) ){
 }
 $posAux = $_SESSION['posini'];
 //------------
-
-// Borro cualquier mensaje "
 $_SESSION['msg']=" ";
+//ob_start(); // La salida se guarda en el bufer
+
+
+    // //CONTROLAMOS LA FUNCION DE ORDENACION
+    // En caso de que inicie el programa, que arranque con esta ordenacion default
+    if(!isset($_SESSION['current_ordenacion'])){
+        $_SESSION['current_ordenacion'] = "id";
+        $_SESSION['current_sentido'] = "ASC";
+    }
+
+
+    //SI ENCUENTRA ALGÚN TIPO DE ORDENACION MANDADO POR EL USER, QUE HAGA LAS SIGUIENTES COMPROBACIONES
+    if(isset($_GET['ordenacion']))
+    {
+        $cambiarSentido = false;
+        //SI EL USUARIO LE DA AL MISMO TIPO DE ORDENACION, SOLO SE CAMBIARA SI ES ASC O DESC
+        if($_SESSION['current_ordenacion'] == $_GET['ordenacion'])
+        {
+            print_r("entro en el if");
+
+            if($_SESSION['current_sentido'] == "ASC"){
+                $_SESSION['current_sentido'] = "DESC";
+            }else{
+                $_SESSION['current_sentido'] = "ASC";
+            }
+
+        }else{
+            $_SESSION['current_sentido'] = "ASC";
+        }
+
+
+
+        $_SESSION['current_ordenacion'] = $_GET['ordenacion'];
+    }
+    
+    // echo("<br>");
+    // print_r($_SESSION['current_ordenacion']);
+    // echo("<br>");
+    // print_r($_SESSION['current_sentido']);
+
+
+    
+
+
 
 ob_start(); // La salida se guarda en el bufer
+
+
+
+
+
+
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == "GET" ){
     
     // Proceso las ordenes de navegación
