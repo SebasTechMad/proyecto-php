@@ -103,8 +103,21 @@ function crudPostModificar(){
         $db = AccesoDatos::getModelo();
 
 
-        $db->modCliente($cli);
-        $_SESSION['msg'] = "El usuario ha sido modificado";
+        $comprobacionCorreo = $db->getClienteCorreo($cli->email);
+
+        if($comprobacionCorreo){
+
+            if($comprobacionCorreo->id != $_SESSION['current_id']){
+                $_SESSION['msg'] = "Error, correo electrónico ya utilizado";
+            }else{
+                $db->modCliente($cli);
+                $_SESSION['msg'] = "El usuario ha sido modificado";
+            }
+
+        }else{
+            $db->modCliente($cli);
+            $_SESSION['msg'] = "El usuario ha sido modificado";
+        }
     }
 }
 

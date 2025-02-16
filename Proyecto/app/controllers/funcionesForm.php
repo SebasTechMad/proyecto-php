@@ -76,6 +76,51 @@
 
             //if(checkFotoPerfil($_SESSION['current_id']) != )
 
+            $urlComprobacion = checkFotoPerfil($_SESSION['current_id']);
+
+            // if(!file_exists($urlComprobacion) && $_POST['orden'] != "Modificar"){
+
+            //     if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+            
+            //         $uploadDir = 'app/uploads/';
+        
+            //         $formatos_permitidos =  array('jpg','png','jpeg');
+            //         $archivo = $_FILES['foto']['name'];
+            //         $extension = pathinfo($archivo, PATHINFO_EXTENSION);
+        
+            //         if(!in_array($extension, $formatos_permitidos) ) {
+            //             $comprobacion = false;
+            //             $cadError .= "formato de imagen, ";
+            //             $errorres++;
+            //         }else{
+        
+            //             $numID = intval($_SESSION['current_id']);
+            //             $numID = $numID / 100000000;
+            //             $numID = number_format($numID,8);
+            //             $numID = str_replace("0.","",$numID);
+    
+            //             foreach ($formatos_permitidos as $formato)
+            //             {
+            //                 if(file_exists($uploadDir.$numID.".".$formato))
+            //                 {
+            //                     unlink($uploadDir.$numID.".".$formato);
+            //                 }
+            //             }
+        
+        
+            //             $uploadFile = $uploadDir.$numID.".".$extension;
+            //             move_uploaded_file($_FILES['foto']['tmp_name'], $uploadFile);
+            //         }
+        
+            //     }
+            //     else{
+            //         $comprobacion = false;
+            //         $cadError .= "tamaño de imagen, ";
+            //         $errorres++;
+            //     }
+
+            // }
+
 
             if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
             
@@ -111,9 +156,12 @@
     
             }
             else{
-                $comprobacion = false;
-                $cadError .= "tamaño de imagen, ";
-                $errorres++;
+                //Comprobamos que la foto no esté vacia
+                if($_FILES['foto']['name'] != ""){
+                    $comprobacion = false;
+                    $cadError .= "tamaño de imagen, ";
+                    $errorres++;
+                }
             }
         }
 
@@ -256,10 +304,6 @@
     function getBandera($ip)
     {
         $url = "";
-
-        //print_r(strval($ip));
-
-        //$ip = "8.8.8.8"; // Reemplaza con la IP que quieras consultar
         $url = "http://ip-api.com/json/".strval($ip);
 
         // Obtener el contenido JSON de la API
@@ -272,7 +316,7 @@
         if(isset($json_ip['countryCode'])){
             $url = "https://flagpedia.net/data/flags/w580/".strtolower($json_ip['countryCode']).".png";
         }else{
-            $url = "./app/uploads/calavera.jpg";
+            $url = "./web/srcs/calavera.jpg";
         }
         
         return $url;
