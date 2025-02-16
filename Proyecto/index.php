@@ -9,7 +9,7 @@ require_once 'app/models/Cliente.php';
 require_once 'app/models/Usuario.php';
 require_once 'app/models/AccesoDatosPDO.php';
 require_once 'app/controllers/crudclientes.php';
-require_once 'vendor/autoload.php';
+//require_once 'vendor/autoload.php';
 require_once 'app/controllers/funcionesForm.php';
 
     $msgLogin = "";
