@@ -7,3 +7,6 @@ He corregido los siguientes ejercicios de la última entrega:
 
 Mejoras realizadas
 He realizado las mejoras del 1 hasta el 9
+
+ATENCION-TENGO UN PROBLEMA CON EL PDF DE COMPOSER, NO ME ESTÁ DEJANDO UTILIZARLO Y ROMPE TODO EL CÓDIGO
+PARA OMITIR EL ERROR, SIMPLEMENTE VAS A LÍNEA 12 DE INDEX.PHP PARA COMENTAR EL AUTOLOAD QUE ESTÁ SALTANDO ERROR
