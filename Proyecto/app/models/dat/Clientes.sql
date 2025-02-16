@@ -9,6 +9,26 @@ create table Clientes (
 	CONSTRAINT pk_usuarios PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+create table Usuarios (
+	login VARCHAR(30) NOT NULL,
+	password VARCHAR(250),
+	rol INT(1),
+	CONSTRAINT pk_usuarios PRIMARY KEY(login)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*clave123*/
+INSERT INTO usuarios (login, password, rol) VALUES ('usuario1', '$2y$10$dI/zFzGzyAEV3zetjB.8OupBW/ifYeWbrg1XnmytXSwiJiXqG8/iu', 0);
+/*secreto456*/
+INSERT INTO usuarios (login, password, rol) VALUES ('usuario2', '$2y$10$glXy3OqCSG8CxZFk3ICope.lnyDNgrzxqISH15icf0u9y3apY07N.', 1);
+/*pass789*/
+INSERT INTO usuarios (login, password, rol) VALUES ('usuario3', '$2y$10$eX1G3t4JdknbTzrMLp5/9ehpq67HlUfpw9eFBO4BBUzNyxuApUThC', 0);
+/*contrasena321*/
+INSERT INTO usuarios (login, password, rol) VALUES ('usuario4', '$2y$10$R.3w/.pylzThyXl/iwc33.TJ4Wk49diKNPY.6gdIIteWhp16pTdv2', 1);
+
+
+
+
+
 
 insert into Clientes (id, first_name, last_name, email, gender, ip_address, telefono) values (1, 'Cletis', 'Desporte', 'cdesporte0@ucla.edu', 'Male', '205.183.245.97', '317-116-9163');
 insert into Clientes (id, first_name, last_name, email, gender, ip_address, telefono) values (2, 'Vasili', 'McCuthais', 'vmccuthais1@hugedomains.com', 'Male', '121.41.29.60', '154-655-1829');

@@ -71,6 +71,21 @@ class AccesoDatos {
                 // Devuelvo el array de objetos
         return $tuser;
     }
+
+    public function getUsuario($login)
+    {
+        $usuario = false;
+        $stmt_login = $this->dbh->prepare("select * from usuarios where login=:login");
+        $stmt_login->setFetchMode(PDO::FETCH_CLASS, 'Usuario');
+        $stmt_login->bindParam(':login', $login);
+        if ( $stmt_login->execute() ){
+             if ( $obj = $stmt_login->fetch()){
+                $usuario= $obj;
+            }
+        }
+        return $usuario;
+
+    }
     
       
     // SELECT Devuelvo un usuario o false
