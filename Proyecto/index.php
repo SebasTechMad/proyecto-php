@@ -33,6 +33,7 @@ require_once 'app/controllers/funcionesForm.php';
 
                 if(password_verify($_POST['clave'], $usuario->password)){
                     $_SESSION['user_login'] = $_POST['login'];
+                    $_SESSION['rol'] = $usuario->rol;
                     $_SESSION['intentos'] = 0;
                 }else{
                     $msgLogin = "Error, Usuario o contraseña no válidos";
@@ -160,19 +161,30 @@ require_once 'app/controllers/funcionesForm.php';
                     }
                 }
             }
-    
-            // Si no hay nada en la buffer 
-            // Cargo genero la vista con la lista por defecto
-            if ( ob_get_length() == 0){
-                $db = AccesoDatos::getModelo();
-                $posini = $_SESSION['posini'];
-                $tclientes = $db->getClientes($posini,FPAG);
-                require_once "app/views/list.php";    
+
+            if(isset($_GET['orden']) && $_GET['orden'] == "Cerrar"){
+            
+                unset($_SESSION['user_login']);
+                unset($_SESSION['rol']);
+
+                require_once "app/views/login.php";
+                header("Location: ./");
             }
-            $contenido = ob_get_clean();
-            $msg = $_SESSION['msg'];
-            // Muestro la página principal con el contenido generado
-            require_once "app/views/principal.php";
+            else{
+                // Si no hay nada en la buffer 
+                // Cargo genero la vista con la lista por defecto
+                if ( ob_get_length() == 0){
+                    $db = AccesoDatos::getModelo();
+                    $posini = $_SESSION['posini'];
+                    $tclientes = $db->getClientes($posini,FPAG);
+                    require_once "app/views/list.php";    
+                }
+                $contenido = ob_get_clean();
+                $msg = $_SESSION['msg'];
+                // Muestro la página principal con el contenido generado
+                require_once "app/views/principal.php";
+            }
+
             #endregion
         }
     }

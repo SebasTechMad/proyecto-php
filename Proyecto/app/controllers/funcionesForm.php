@@ -37,6 +37,7 @@
         if(count($cadTelefono) != 3){
             $comprobacion = false;
             $cadError .= "número de teléfono, ";
+            $errorres++;
         }else{
             $lineaNumeros = 0; 
             foreach($cadTelefono as $cifra) {
@@ -46,6 +47,7 @@
                     {
                         $comprobacion = false;
                         $cadError .= "número de teléfono, ";
+                        $errorres++;
                         break;    
                     }
                 }
@@ -56,6 +58,7 @@
                     {
                         $comprobacion = false;
                         $cadError .= "número de teléfono, ";
+                        $errorres++;
                         break;    
                     }
                 }
@@ -70,6 +73,10 @@
 
         if($_SESSION['current_id'] != "")
         {
+
+            //if(checkFotoPerfil($_SESSION['current_id']) != )
+
+
             if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
             
                 $uploadDir = 'app/uploads/';
@@ -79,7 +86,9 @@
                 $extension = pathinfo($archivo, PATHINFO_EXTENSION);
     
                 if(!in_array($extension, $formatos_permitidos) ) {
+                    $comprobacion = false;
                     $cadError .= "formato de imagen, ";
+                    $errorres++;
                 }else{
     
                     $numID = intval($_SESSION['current_id']);
@@ -102,7 +111,9 @@
     
             }
             else{
+                $comprobacion = false;
                 $cadError .= "tamaño de imagen, ";
+                $errorres++;
             }
         }
 
@@ -112,7 +123,7 @@
         }
 
         if(!$comprobacion){
-            $_SESSION['msg'] = "Error en el ".$cadError.". Vuelva a intentarlo";
+            $_SESSION['msg'] = "Error en ".$cadError.". Vuelva a intentarlo";
         }
         return $comprobacion;
     }

@@ -1,3 +1,16 @@
+/* @keyframes change-color {
+  from{
+    background-color: white;
+  }
+  to{
+    background-color: #ea4c0e;
+    border: white solid 1px;
+  }
+} */
+
+
+
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -126,5 +139,25 @@ input[value="Siguiente"]:hover{
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+button[value="Nuevo"]{
+  border: #032970 solid 1px;
+}
+
+button[value="Nuevo"]:hover{
+  background-color: #032970;
+  border: #032970 solid 1px;
+  color: white;
+}
+
+button[value="Cerrar"]{
+    border: #ea4c0e solid 1px;
+}
+
+button[value="Cerrar"]:hover{
+    background-color: #ea4c0e;
+    border: #ea4c0e solid 1px;
+    color: white;
 }
 

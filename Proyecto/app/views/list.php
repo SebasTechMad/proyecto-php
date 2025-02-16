@@ -1,5 +1,6 @@
 <form>
-    <button type="submit" name="orden" value="Nuevo"> Cliente Nuevo </button><br>
+    <button type="submit" name="orden" value="Nuevo"> Cliente Nuevo </button>
+    <button type="submit" name="orden" value="Cerrar">Cerrar sesión</button><br>
 </form>
 <br>
 <table>
@@ -23,8 +24,12 @@
                 <td><?= $cli->gender ?> </td>
                 <td><?= $cli->ip_address ?> </td>
                 <td><?= $cli->telefono ?> </td>
-                <td><a href="#" onclick="confirmarBorrar('<?= $cli->first_name ?>','<?= $cli->id ?>');">Borrar</a></td>
-                <td><a href="?orden=Modificar&id=<?= $cli->id ?>">Modificar</a></td>
+                
+                <?php if($_SESSION['rol'] == 1): ?>
+                    <td><a href="#" onclick="confirmarBorrar('<?= $cli->first_name ?>','<?= $cli->id ?>');">Borrar</a></td>
+                    <td><a href="?orden=Modificar&id=<?= $cli->id ?>">Modificar</a></td>
+                <?php endif; ?>
+
                 <td><a href="?orden=Detalles&id=<?= $cli->id ?>">Detalles</a></td>
             </tr>
         <?php endforeach; ?>

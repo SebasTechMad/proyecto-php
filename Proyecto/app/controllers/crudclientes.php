@@ -63,13 +63,26 @@ function crudPostAlta(){
         $cli->ip_address    =$_POST['ip_address'];
         $cli->telefono      =$_POST['telefono'];
         $db = AccesoDatos::getModelo();
-        if ( $db->addCliente($cli) ) {
-            $_SESSION['msg'] = " El usuario ".$cli->first_name." se ha dado de alta ";
-            $newID = $db->getLastCliente();
-            addProfileId($newID->id);
-            } else {
+        
+        //COMPROBACION DE CORREO
+        $comprobacion = $db->getClienteCorreo($cli->email);
+
+        if(!$comprobacion){
+            if ($db->addCliente($cli))
+            {
+                $_SESSION['msg'] = " El usuario ".$cli->first_name." se ha dado de alta ";
+                $newID = $db->getLastCliente();
+                addProfileId($newID->id);
+            } 
+            else {
                 $_SESSION['msg'] = " Error al dar de alta al usuario ".$cli->first_name."."; 
             }
+        }else{
+            $_SESSION['msg'] = "el correo $cli->email ya está registrado en la BD";
+        }
+        
+        
+        
     }
 }
 
@@ -88,11 +101,10 @@ function crudPostModificar(){
         $cli->ip_address    =$_POST['ip_address'];
         $cli->telefono      =$_POST['telefono'];
         $db = AccesoDatos::getModelo();
-        if ( $db->modCliente($cli) ){
-            $_SESSION['msg'] = " El usuario ha sido modificado";
-        } else {
-            $_SESSION['msg'] = " Error al modificar el usuario ";
-        }
+
+
+        $db->modCliente($cli);
+        $_SESSION['msg'] = "El usuario ha sido modificado";
     }
 }
 

@@ -102,6 +102,23 @@ class AccesoDatos {
         return $cli;
     }
 
+    public function getClienteCorreo ($correo) {
+        $cli = false;
+
+        $stmt_cli_correo   = $this->dbh->prepare("select * from Clientes where email=:email");
+        $stmt_cli_correo->setFetchMode(PDO::FETCH_CLASS, 'Cliente');
+        $stmt_cli_correo->bindParam(':email', $correo);
+        if ( $stmt_cli_correo->execute() ){
+             if ( $obj = $stmt_cli_correo->fetch()){
+                $cli= $obj;
+            }
+        }
+
+        return $cli;
+    }
+
+
+
     public function getLastCliente(){
         $cli = false;
         $stmt_cli   = $this->dbh->prepare("SELECT * FROM `Clientes` ORDER BY id DESC LIMIT 1");
